@@ -1,0 +1,16 @@
+https://192.168.152.9 {
+    root * ./frontend/dist
+    encode gzip
+    file_server
+
+    @api path /api/*
+    reverse_proxy @api 127.0.0.1:8000
+
+    tls internal
+
+	log {
+        output stdout
+        format console
+    }
+}
+

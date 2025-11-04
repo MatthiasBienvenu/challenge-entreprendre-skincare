@@ -1,5 +1,5 @@
 [project]
-name = "back"
+name = "backend"
 version = "0.1.0"
 description = "YOLO inference backend for skin defects detection"
 readme = "README.md"

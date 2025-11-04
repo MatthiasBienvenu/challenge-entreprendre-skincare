@@ -2,11 +2,13 @@ import requests
 import json
 from typing import Dict, Any
 from datetime import datetime
+from src.api.config.settings import DOMAIN, PORT, API_PREFIX
+
 
 def add_user(user_data: Dict[str, Any]) -> Dict[str, Any]:
     """
     Add a new user to the database via the API.
-    
+
     Args:
         user_data: Dictionary containing user information
             {
@@ -17,24 +19,24 @@ def add_user(user_data: Dict[str, Any]) -> Dict[str, Any]:
                 "weight": int,
                 "gender": str
             }
-    
+
     Returns:
         Dictionary containing the API response
     """
-    base_url = 'http://localhost:8000/api/v1'
+    base_url = f"http://localhost:8000{API_PREFIX}"
     endpoint = f"{base_url}/profile"
-    
+
     try:
         response = requests.post(endpoint, json=user_data)
         return {
             "status_code": response.status_code,
-            "response": response.json() if response.status_code == 200 else response.text
+            "response": response.json()
+            if response.status_code == 200
+            else response.text,
         }
     except requests.exceptions.RequestException as e:
-        return {
-            "status_code": 500,
-            "response": f"Error making request: {str(e)}"
-        }
+        return {"status_code": 500, "response": f"Error making request: {str(e)}"}
+
 
 def test_add_user():
     """Test adding a new user to the database"""
@@ -46,13 +48,13 @@ def test_add_user():
         "dob": "1995-05-03",
         "height": 175,
         "weight": 70,
-        "gender": "Male"
+        "gender": "Male",
     }
-    
+
     result = add_user(test_user_1)
     print(f"Status Code: {result['status_code']}")
     print(f"Response: {json.dumps(result['response'], indent=2)}")
-    
+
     # Test case 2: Invalid date format
     print("\nTest Case 2: Invalid date format")
     test_user_2 = {
@@ -61,13 +63,13 @@ def test_add_user():
         "dob": "03-05-1995",  # Wrong format
         "height": 165,
         "weight": 60,
-        "gender": "Female"
+        "gender": "Female",
     }
-    
+
     result = add_user(test_user_2)
     print(f"Status Code: {result['status_code']}")
     print(f"Response: {json.dumps(result['response'], indent=2)}")
-    
+
     # Test case 3: Missing required field
     print("\nTest Case 3: Missing required field")
     test_user_3 = {
@@ -76,16 +78,17 @@ def test_add_user():
         "dob": "1995-05-03",
         "height": 180,
         # Missing weight
-        "gender": "Male"
+        "gender": "Male",
     }
-    
+
     result = add_user(test_user_3)
     print(f"Status Code: {result['status_code']}")
     print(f"Response: {json.dumps(result['response'], indent=2)}")
 
+
 def check_api_health():
     """Check if the API is running and accessible"""
-    base_url = 'http://localhost:8000'
+    base_url = f"http://localhost:8000"
     try:
         response = requests.get(base_url)
         if response.status_code == 200:
@@ -98,12 +101,13 @@ def check_api_health():
         print(f"\nAPI is not accessible: {str(e)}")
         return False
 
+
 if __name__ == "__main__":
     print("Starting user management tests...")
-    
+
     # First check if API is running
     if check_api_health():
         # Run the user management tests
         test_add_user()
     else:
-        print("Cannot run tests: API is not accessible") 
+        print("Cannot run tests: API is not accessible")

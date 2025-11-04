@@ -4,10 +4,11 @@ from src.api.config.settings import ALLOWED_ORIGINS, API_PREFIX
 from src.api.routes import profile, detection, analysis, skin_plan, timeseries
 from src.db.user_profile_db import init_db
 
+
 app = FastAPI(
     title="Acne Tracker Analysis API",
     description="API for skin condition detection and analysis",
-    version="1.0.0"
+    version="1.0.0",
 )
 
 # Add CORS middleware
@@ -29,10 +30,11 @@ app.include_router(analysis.router, prefix=API_PREFIX)
 app.include_router(skin_plan.router, prefix=API_PREFIX)
 app.include_router(timeseries.router, prefix=API_PREFIX)
 
+
 @app.get("/")
 async def root():
     return {
         "message": "Acne Tracker Analysis API is running",
         "docs_url": "/docs",
-        "redoc_url": "/redoc"
-    } 
+        "redoc_url": "/redoc",
+    }
