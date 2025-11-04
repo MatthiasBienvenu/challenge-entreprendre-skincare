@@ -1,0 +1,102 @@
+{
+  "$schema": "https://example.com/schemas/products.config.schema.json",
+  "version": 1,
+  "currency": "EUR",
+  "defaultFallback": [
+    {
+      "name": "Gentle Cleanser",
+      "url": "https://www.cerave.fr/nos-produits/nettoyants/gel-moussant",
+      "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop",
+      "price": 12.9,
+      "tags": ["cleanser", "fragrance-free", "gentle"]
+    },
+    {
+      "name": "Daily Moisturizer SPF 30",
+      "url": "https://www.laroche-posay.fr/",
+      "image": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=300&fit=crop",
+      "price": 18.5,
+      "tags": ["moisturizer", "SPF", "daily-care"]
+    }
+  ],
+  "map": {
+    "acne": [
+      {
+        "name": "2% Salicylic Acid Serum",
+        "url": "https://theordinary.com/en-fr/salicylic-acid-2-serum-100422.html",
+        "image": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&h=300&fit=crop",
+        "price": 14.5,
+        "tags": ["BHA", "acne", "oil-control", "exfoliant"]
+      },
+      {
+        "name": "Niacinamide 10% + Zinc 1%",
+        "url": "https://theordinary.com/en-fr/niacinamide-10-zinc-1-serum-100436.html",
+        "image": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=300&fit=crop",
+        "price": 12.0,
+        "tags": ["niacinamide", "zinc", "pores", "acne"]
+      },
+      {
+        "name": "Benzoyl Peroxide 2.5% Gel",
+        "url": "https://www.laroche-posay.fr/",
+        "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop",
+        "price": 16.9,
+        "tags": ["benzoyl-peroxide", "acne", "spot-treatment"]
+      }
+    ],
+    "eczema": [
+      {
+        "name": "Ceramide Barrier Cream",
+        "url": "https://www.cerave.fr/nos-produits/hydratants/creme-hydratante",
+        "image": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=300&fit=crop",
+        "price": 18.0,
+        "tags": ["ceramides", "barrier", "fragrance-free", "eczema"]
+      },
+      {
+        "name": "Colloidal Oatmeal Lotion",
+        "url": "https://www.aveneusa.com/",
+        "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop",
+        "price": 15.5,
+        "tags": ["oatmeal", "soothing", "eczema", "sensitive"]
+      }
+    ],
+    "rosacea": [
+      {
+        "name": "Azelaic Acid 10% Suspension",
+        "url": "https://theordinary.com/en-fr/azelaic-acid-10-suspension-cream-100409.html",
+        "image": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&h=300&fit=crop",
+        "price": 16.0,
+        "tags": ["azelaic-acid", "rosacea", "redness", "brightening"]
+      },
+      {
+        "name": "Centella Soothing Cream",
+        "url": "https://www.laroche-posay.fr/",
+        "image": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=300&fit=crop",
+        "price": 19.9,
+        "tags": ["centella", "soothing", "rosacea", "sensitive"]
+      }
+    ],
+    "hyperpigmentation": [
+      {
+        "name": "Vitamin C 23% Suspension",
+        "url": "https://theordinary.com/en-fr/vitamin-c-23-suspension-ha-spheres-2-serum-100408.html",
+        "image": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&h=300&fit=crop",
+        "price": 17.5,
+        "tags": ["vitamin-c", "brightening", "hyperpigmentation"]
+      },
+      {
+        "name": "Alpha Arbutin 2% + HA",
+        "url": "https://theordinary.com/en-fr/alpha-arbutin-2-ha-serum-100411.html",
+        "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop",
+        "price": 13.0,
+        "tags": ["alpha-arbutin", "brightening", "dark-spots"]
+      }
+    ]
+  },
+  "overrides": {
+    "byConfidence": [
+      { "disease": "acne", "minConfidence": 0.7, "limit": 3 },
+      { "disease": "eczema", "minConfidence": 0.6, "limit": 2 },
+      { "disease": "rosacea", "minConfidence": 0.65, "limit": 2 },
+      { "disease": "hyperpigmentation", "minConfidence": 0.7, "limit": 2 }
+    ]
+  }
+}
