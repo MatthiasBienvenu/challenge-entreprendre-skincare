@@ -1,4 +1,4 @@
-https://skinai {
+https://aivana.h.minet.net {
     root * ./frontend/dist
     encode gzip
     file_server
