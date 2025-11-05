@@ -2,6 +2,7 @@ import os
 import base64
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 from fastapi import APIRouter, UploadFile, File
 from src.api.models.schemas import DetectionResponse, DetectionInfo
 from src.api.core.exceptions import (
@@ -18,11 +19,12 @@ router = APIRouter(prefix="/detect", tags=["detection"])
 
 @router.post("/", response_model=DetectionResponse)
 async def detect_skin_conditions(file: UploadFile = File(...)):
+    print("ddddddddddddddddddddddddddddddd")
     if file.content_type not in ALLOWED_FILE_TYPES:
         raise InvalidFileTypeError(file.content_type)
 
     if not os.path.exists(MODEL_WEIGHTS_PATH):
-        raise ModelNotAvailableError()
+        raise ModelNotAvaresultsilableError()
 
     temp_image_path = None
     try:
@@ -39,6 +41,8 @@ async def detect_skin_conditions(file: UploadFile = File(...)):
             model_path=MODEL_WEIGHTS_PATH, image_path=temp_image_path
         )
 
+        print(f"{type(analysis_results) = }")
+
         if not analysis_results or not analysis_results.get("success"):
             raise AnalysisError(
                 analysis_results.get("message", "Unknown analysis error")
@@ -50,6 +54,7 @@ async def detect_skin_conditions(file: UploadFile = File(...)):
         if heatmap_data is not None and isinstance(heatmap_data, np.ndarray):
             success, buffer = cv2.imencode(".png", heatmap_data)
             if success:
+                print("encoding successful")
                 heatmap_base64 = base64.b64encode(buffer).decode("utf-8")
 
         return DetectionResponse(

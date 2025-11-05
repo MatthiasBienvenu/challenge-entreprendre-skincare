@@ -23,8 +23,8 @@ ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     # Prod
-    "https://192.168.152.9:8000",
-    "https://192.168.152.9",
+    "https://skinai:8000",
+    "https://skinai",
     "https://localhost",
 ]
 

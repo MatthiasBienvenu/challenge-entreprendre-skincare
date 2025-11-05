@@ -1,4 +1,4 @@
-https://192.168.152.9 {
+https://skinai {
     root * ./frontend/dist
     encode gzip
     file_server
@@ -13,4 +13,3 @@ https://192.168.152.9 {
         format console
     }
 }
-
