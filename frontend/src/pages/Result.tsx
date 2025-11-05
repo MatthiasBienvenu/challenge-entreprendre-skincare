@@ -30,7 +30,8 @@ const Result = () => {
       return;
     }
 
-    setResult(JSON.parse(storedResult));
+    const parsedResult = JSON.parse(storedResult);
+    setResult(parsedResult);
     setScanImage(storedImage);
   }, [navigate]);
 
@@ -42,7 +43,16 @@ const Result = () => {
     );
   }
 
-  const products = getProductsForDisease(result.disease, result.confidence);
+  // Get the primary detection (highest confidence)
+  const primaryDetection = result.detections && result.detections.length > 0
+    ? result.detections.reduce((prev, current) => 
+        (prev.confidence > current.confidence) ? prev : current
+      )
+    : null;
+
+  const products = primaryDetection 
+    ? getProductsForDisease(primaryDetection.class_name, primaryDetection.confidence)
+    : [];
 
   const handleNewScan = () => {
     localStorage.removeItem('lastScanResult');
@@ -68,15 +78,30 @@ const Result = () => {
 
       <main className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="space-y-8">
-          {scanImage && (
-            <div className="rounded-lg overflow-hidden shadow-lg max-w-md mx-auto">
-              <img
-                src={scanImage}
-                alt="Scan"
-                className="w-full aspect-video object-cover"
-              />
-            </div>
-          )}
+          {/* Display both original image and heatmap if available */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {scanImage && (
+              <div className="rounded-lg overflow-hidden shadow-lg">
+                <img
+                  src={scanImage}
+                  alt="Scan original"
+                  className="w-full aspect-video object-cover"
+                />
+                <p className="text-center text-sm text-muted-foreground p-2">Image originale</p>
+              </div>
+            )}
+            
+            {result.heatmap_image_base64 && (
+              <div className="rounded-lg overflow-hidden shadow-lg">
+                <img
+                  src={`data:image/png;base64,${result.heatmap_image_base64}`}
+                  alt="Carte thermique"
+                  className="w-full aspect-video object-cover"
+                />
+                <p className="text-center text-sm text-muted-foreground p-2">Carte thermique</p>
+              </div>
+            )}
+          </div>
 
           <ResultCard result={result} />
 

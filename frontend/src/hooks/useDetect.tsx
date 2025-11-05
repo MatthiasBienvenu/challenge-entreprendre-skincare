@@ -58,15 +58,17 @@ export const useDetect = () => {
 
       const data = await response.json();
 
-      // Normalize response to match expected format
-      const normalizedData: DetectResponse = {
-        disease: data.disease || data.condition || "unknown",
-        confidence: data.confidence,
-        extras: data.extras || data,
-      };
+      if (!data.success) {
+        toast({
+          title: "Échec de l'analyse",
+          description: data.message || "L'analyse a échoué.",
+          variant: "destructive",
+        });
+        return null;
+      }
 
-      setResult(normalizedData);
-      return normalizedData;
+      setResult(data);
+      return data;
     } catch (error) {
       console.error("Detection error:", error);
       toast({

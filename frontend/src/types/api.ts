@@ -1,7 +1,18 @@
+export interface DetectionInfo {
+  class_name: string;
+  confidence: number;
+}
+
 export interface DetectResponse {
-  disease: string;
-  confidence?: number;
-  extras?: Record<string, unknown>;
+  success: boolean;
+  message: string;
+  severity_score?: number;
+  percentage_area?: number;
+  average_intensity?: number;
+  lesion_count?: number;
+  heatmap_image_base64?: string;
+  detections?: DetectionInfo[];
+  model_classes?: Record<number, string>;
 }
 
 export interface ProductItem {
