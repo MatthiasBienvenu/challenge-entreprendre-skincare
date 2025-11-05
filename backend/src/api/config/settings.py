@@ -11,6 +11,8 @@ MODEL_WEIGHTS_PATH = os.path.join(BACK_DIR, "src", "detection", "best.pt")
 # Database paths
 DB_PATH = os.path.join(BACK_DIR, "tsa", "acne_tracker.db")
 
+API_BASE_URL = "https://aivana.h.minet.net"
+
 # API settings
 ALLOWED_ORIGINS = [
     # Streamlit (si tu l'utilises)
@@ -23,8 +25,8 @@ ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     # Prod
-    "https://aivana.h.minet.net:8000",
-    "https://aivana.h.minet.net",
+    f"{API_BASE_URL}:8000",
+    API_BASE_URL,
     "https://localhost",
 ]
 
