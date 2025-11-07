@@ -36,12 +36,12 @@ const Scan = () => {
     }
 
     const result = await detectSkinCondition(imageToAnalyze);
-    
+
     if (result) {
       // Store result and image in localStorage
       localStorage.setItem('lastScanResult', JSON.stringify(result));
       localStorage.setItem('lastScanImage', imageToAnalyze);
-      
+
       // Navigate to result page
       navigate('/result');
     }
@@ -57,7 +57,7 @@ const Scan = () => {
             <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
               <ScanIcon className="w-5 h-5 text-primary-foreground" />
             </div>
-            <h1 className="text-xl font-bold">Skin Analyzer</h1>
+            <h1 className="text-xl font-bold">AIVANA Tech</h1>
           </div>
           <ThemeToggle />
         </div>

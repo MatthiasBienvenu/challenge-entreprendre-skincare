@@ -1,6 +1,6 @@
 {
-  "name": "Skin Analyzer",
-  "short_name": "SkinAnalyzer",
+  "name": "AIVANA Tech",
+  "short_name": "AIVANA",
   "description": "Analysez votre peau et obtenez des recommandations produits personnalisées",
   "start_url": "/",
   "display": "standalone",

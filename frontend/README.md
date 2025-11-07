@@ -1,4 +1,4 @@
-# Skin Analyzer - PWA d'Analyse de Peau
+# AIVANA Tech - PWA d'Analyse de Peau
 
 Application web progressive (PWA) mobile-first pour l'analyse de conditions cutanées avec recommandations de produits personnalisées.
 
